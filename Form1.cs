@@ -11,11 +11,13 @@ using System.Windows.Forms;
 using MyoSharp.Device;
 using MyoSharp.Communication;
 using MyoSharp.Exceptions;
+using System.Threading;
 
 namespace PongWithMyo
 {
     public partial class Form1 : Form
     {
+
         IChannel myoChannel;
         IHub myoHub;
 
@@ -24,9 +26,12 @@ namespace PongWithMyo
             InitializeComponent();
         }
 
+    
         private void Form1_Load(object sender, EventArgs e)
         {
-            InitializeMyo();
+            // InitializeMyo();
+
+            
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -43,6 +48,8 @@ namespace PongWithMyo
             myoHub.MyoDisconnected += myoHub_MyoDisconnected;
 
             myoChannel.StartListening();
+
+            
         }
 
         #region CONNECT/DISCONNECT MYO
@@ -61,8 +68,8 @@ namespace PongWithMyo
 
         private void StopMyo()
         {
-            myoChannel.StopListening();
-            myoChannel.Dispose();
+            //myoChannel.StopListening();
+            //myoChannel.Dispose();
         }
     }
 }
