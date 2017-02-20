@@ -1,0 +1,9 @@
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\bin\Debug\PongWithMyo.exe.config
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\bin\Debug\PongWithMyo.exe
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\bin\Debug\PongWithMyo.pdb
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.Form1.resources
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.Properties.Resources.resources
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csproj.GenerateResource.Cache
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.exe
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.pdb
+c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache
