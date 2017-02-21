@@ -18,6 +18,7 @@ namespace PongWithMyo
     public partial class Form1 : Form
     {
         #region VARIABLES
+        // VARIABLES
         IChannel myoChannel;
         IHub myoHub;
         
@@ -39,7 +40,7 @@ namespace PongWithMyo
         {
             InitializeComponent();       
         }
-
+         
         private void Form1_Load(object sender, EventArgs e)
         {
             // InitializeMyo();
@@ -53,29 +54,36 @@ namespace PongWithMyo
         #region CODE FOR PONG LOGIC
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+            // if the game isn't paused
             if (!Pause)
            {
+                // set the location for all the objects in the game
                 Ball.Location = new Point(Ball.Location.X + BallX, Ball.Location.Y + BallY);
                 
                 Player1.Location = new Point(Player1.Location.X + PlayerOneMovement, Player1.Location.Y);
                 
                 Player2.Location = new Point(Player2.Location.X + PlayerTwoMovement, Player2.Location.Y);
             }
+            // if the ball goes below the canvas - player one wins
             if(Ball.Location.Y < 0)
             {
-                ScoreOne++;
+                ScoreOne++; // score for player one goes up by one
                 p1Score.Text = ScoreOne.ToString();
+                // shrinks the ball slightly
                 Ball.Width-=2;
                 Ball.Height-=2;
+                // resets the ball back to the center
                 Ball.Location = new Point(this.Width / 2, this.Height / 2);
             }
+            // if the ball goes above the canvas - player two wins
             if (Ball.Location.Y > this.Height)
             {
-                ScoreTwo++;
+                ScoreTwo++; // score for player two goes up by one
                 p2score.Text = ScoreTwo.ToString();
-                Ball.Width--;
-                Ball.Height--;
+                // shrinks the ball slightlyS
+                Ball.Width-=2;
+                Ball.Height-=2;
+                // resets the ball back to the center
                 Ball.Location = new Point(this.Width / 2, this.Height / 2);
             }
 
