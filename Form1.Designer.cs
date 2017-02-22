@@ -45,9 +45,9 @@
             // Player2
             // 
             this.Player2.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.Player2.BackColor = System.Drawing.Color.Crimson;
+            this.Player2.BackColor = System.Drawing.Color.HotPink;
             this.Player2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player2.Location = new System.Drawing.Point(360, 32);
+            this.Player2.Location = new System.Drawing.Point(360, 12);
             this.Player2.Name = "Player2";
             this.Player2.Size = new System.Drawing.Size(120, 21);
             this.Player2.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.Player1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Player1.BackColor = System.Drawing.Color.SpringGreen;
             this.Player1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player1.Location = new System.Drawing.Point(360, 308);
+            this.Player1.Location = new System.Drawing.Point(360, 325);
             this.Player1.Name = "Player1";
             this.Player1.Size = new System.Drawing.Size(120, 21);
             this.Player1.TabIndex = 1;

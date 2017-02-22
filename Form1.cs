@@ -12,6 +12,7 @@ using MyoSharp.Device;
 using MyoSharp.Communication;
 using MyoSharp.Exceptions;
 using System.Threading;
+using MyoSharp.Poses;
 
 namespace PongWithMyo
 {
@@ -22,13 +23,13 @@ namespace PongWithMyo
         IChannel myoChannel;
         IHub myoHub;
         
-        int SpeedOfPlayer = 8;
+        int SpeedOfPlayer = 4;
 
         int PlayerOneMovement;
         int PlayerTwoMovement;
 
-        int BallX = 2;
-        int BallY = 2;
+        int BallX = 1;
+        int BallY = 1;
         
         int ScoreOne;
         int ScoreTwo;
@@ -43,7 +44,7 @@ namespace PongWithMyo
          
         private void Form1_Load(object sender, EventArgs e)
         {
-            // InitializeMyo();
+            InitializeMyo();
 
             Pause = true;
             MessageBox.Show("TRY TO GET THE BALL PAST THE ENEMY'S PADDLE."+
@@ -70,8 +71,8 @@ namespace PongWithMyo
                 ScoreOne++; // score for player one goes up by one
                 p1Score.Text = ScoreOne.ToString();
                 // shrinks the ball slightly
-                Ball.Width-=2;
-                Ball.Height-=2;
+                Ball.Width-=1;
+                Ball.Height-=1;
                 // resets the ball back to the center
                 Ball.Location = new Point(this.Width / 2, this.Height / 2);
             }
@@ -81,8 +82,8 @@ namespace PongWithMyo
                 ScoreTwo++; // score for player two goes up by one
                 p2score.Text = ScoreTwo.ToString();
                 // shrinks the ball slightlyS
-                Ball.Width-=2;
-                Ball.Height-=2;
+                Ball.Width-=1;
+                Ball.Height-=1;
                 // resets the ball back to the center
                 Ball.Location = new Point(this.Width / 2, this.Height / 2);
             }
@@ -103,7 +104,7 @@ namespace PongWithMyo
             {
                 BallX *= -1;
             }
-
+          
         }
         #endregion
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -128,6 +129,46 @@ namespace PongWithMyo
             MessageBox.Show("Myo is connected");
 
             e.Myo.Vibrate(VibrationType.Long);
+            e.Myo.Unlock(UnlockType.Hold); // keeps the MYO unlocked
+            
+
+            var pose = HeldPose.Create(e.Myo, Pose.Fist, Pose.WaveIn, Pose.WaveOut);
+
+            pose.Interval = TimeSpan.FromSeconds(0.5);
+            pose.Start();
+            pose.Triggered += pose_Triggered;
+
+        }
+
+        void pose_Triggered(object sene, PoseEventArgs e)
+        {
+            // InvokeData(e.Pose.ToString());
+            if (e.Myo.Pose == Pose.WaveIn)
+            {
+                PlayerOneMovement = SpeedOfPlayer;
+            }
+            else if (e.Myo.Pose == Pose.WaveOut)
+            {
+                PlayerOneMovement = -SpeedOfPlayer;
+            }
+            else if(e.Myo.Pose == Pose.Unknown)
+            {
+                PlayerOneMovement = 0;
+            }
+            else
+            {
+                PlayerOneMovement = 0;
+            }
+        }
+
+        private void InvokeData(string data)
+        {
+           /* if(InvokeRequired)
+            {
+                this.Invoke(new Action<string>(InvokeData), new object[] { data });
+                return;
+            }
+            AppendText.AppendText(data + Environment.NewLine); */
         }
 
         void myoHub_MyoDisconnected(object sender, MyoEventArgs e)
@@ -147,20 +188,53 @@ namespace PongWithMyo
             #region PLAYER MOVEMENT
             if (e.KeyCode == Keys.Right)
             {
-                PlayerOneMovement = SpeedOfPlayer;
+                if (Player1.Location.X + Player1.Width > this.Width)
+                {
+                    PlayerOneMovement = 0;
+                }
+                else
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerOneMovement = SpeedOfPlayer;
+                }
             }
             else if((e.KeyCode == Keys.Left))
             {
-                PlayerOneMovement = -SpeedOfPlayer;
+                if (Player1.Location.X < 0)
+                {
+                    PlayerOneMovement = 0;
+                }
+                else if(Player1.Location.X > 0)
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerOneMovement = -SpeedOfPlayer;
+                }
             }
             else if((e.KeyCode == Keys.A))
             {
-                PlayerTwoMovement = -SpeedOfPlayer;
+                if (Player2.Location.X < 0)
+                {
+                    PlayerTwoMovement = 0;
+                }
+                else if (Player2.Location.X > 0)
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerTwoMovement = -SpeedOfPlayer;
+                }
             }
             else if((e.KeyCode == Keys.D))
             {
-                PlayerTwoMovement = SpeedOfPlayer;
+                if (Player2.Location.X + Player2.Width > this.Width)
+                {
+                    PlayerTwoMovement = 0; 
+                }
+                else
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerTwoMovement = SpeedOfPlayer; 
+                }
             }
+
             #endregion
             #region PAUSING GAME
             else if ((e.KeyCode == Keys.Space))
