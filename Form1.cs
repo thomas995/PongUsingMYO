@@ -13,6 +13,7 @@ using MyoSharp.Communication;
 using MyoSharp.Exceptions;
 using System.Threading;
 using MyoSharp.Poses;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PongWithMyo
 {
@@ -123,6 +124,17 @@ namespace PongWithMyo
             myoChannel.StartListening();
         }
 
+        private void InitializeMyo2()
+        {
+            myoChannel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
+            myoHub = Hub.Create(myoChannel);
+
+            myoHub.MyoConnected += myoHub_MyoConnected;
+            myoHub.MyoDisconnected += myoHub_MyoDisconnected;
+
+            myoChannel.StartListening();
+        }
+
         #region CONNECT/DISCONNECT MYO
         void myoHub_MyoConnected(object sender, MyoEventArgs e)
         { 
@@ -130,19 +142,64 @@ namespace PongWithMyo
 
             e.Myo.Vibrate(VibrationType.Long);
             e.Myo.Unlock(UnlockType.Hold); // keeps the MYO unlocked
-            
+
+            e.Myo.OrientationDataAcquired += Myo_OrientationDataAcquired;
 
             var pose = HeldPose.Create(e.Myo, Pose.Fist, Pose.WaveIn, Pose.WaveOut);
 
             pose.Interval = TimeSpan.FromSeconds(0.5);
             pose.Start();
-            pose.Triggered += pose_Triggered;
-
+            // pose.Triggered += pose_Triggered;
         }
 
+        private void Myo_OrientationDataAcquired(object sender, OrientationDataEventArgs e)
+        {
+            var pose = HeldPose.Create(e.Myo, Pose.Fist, Pose.DoubleTap);
+            const float PI = (float)System.Math.PI;
+            var Roll = (e.Roll + PI) / (PI * 2.0f) * 100;
+            string data = "Roll: " + Roll.ToString() + Environment.NewLine;
+            InvokeData(data);
+            var InitRoll = 50;
+            if (e.Myo.Pose == Pose.DoubleTap)
+            {
+                Close();
+            }
+            if (e.Myo.Pose == Pose.Fist)
+            {
+                PlayerOneMovement = 0;
+            }
+            else if (Roll <= InitRoll)
+            {
+                if (Player1.Location.X + Player1.Width > this.Width)
+                {
+                    PlayerOneMovement = 0;
+                }
+                else
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerOneMovement = SpeedOfPlayer;
+                }
+                //PlayerOneMovement = SpeedOfPlayer;
+            }
+            else if(Roll >= InitRoll)
+            {
+                if (Player1.Location.X < 0)
+                {
+                    PlayerOneMovement = 0;
+                }
+                else if (Player1.Location.X > 0)
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerOneMovement = -SpeedOfPlayer;
+                } 
+            }
+            
+        }
+        /* SCRAPPED IDEA FOR POSES DUE TO POOR ACCURACY
         void pose_Triggered(object sene, PoseEventArgs e)
         {
             // InvokeData(e.Pose.ToString());
+
             if (e.Myo.Pose == Pose.WaveIn)
             {
                 PlayerOneMovement = SpeedOfPlayer;
@@ -160,26 +217,34 @@ namespace PongWithMyo
                 PlayerOneMovement = 0;
             }
         }
-
-        private void InvokeData(string data)
-        {
-           /* if(InvokeRequired)
-            {
-                this.Invoke(new Action<string>(InvokeData), new object[] { data });
-                return;
-            }
-            AppendText.AppendText(data + Environment.NewLine); */
-        }
+        */
+       
 
         void myoHub_MyoDisconnected(object sender, MyoEventArgs e)
         {
             MessageBox.Show("Myo is disconnected");
+            e.Myo.OrientationDataAcquired -= Myo_OrientationDataAcquired;
+
+        }
+
+
+        public void InvokeData(string data)
+        {
+
+             if(InvokeRequired)
+             {
+                 this.Invoke(new Action<string>(InvokeData), new object[] { data });
+                 return;
+             }
+            richTextBox1.Clear();
+            richTextBox1.AppendText(data + Environment.NewLine);
+
         }
 
         private void StopMyo()
         {
-            //myoChannel.StopListening();
-            //myoChannel.Dispose();
+            myoChannel.StopListening();
+            myoChannel.Dispose();
         }
         #endregion
 

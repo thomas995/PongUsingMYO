@@ -6,4 +6,4 @@ c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\Pong
 c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csproj.GenerateResource.Cache
 c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.exe
 c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.pdb
-c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache
