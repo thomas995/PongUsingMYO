@@ -22,7 +22,10 @@ namespace PongWithMyo
         #region VARIABLES
         // VARIABLES
         IChannel myoChannel;
+        IChannel myoChannel2;
+
         IHub myoHub;
+        IHub myoHub2;
         
         int SpeedOfPlayer = 4;
 
@@ -46,6 +49,8 @@ namespace PongWithMyo
         private void Form1_Load(object sender, EventArgs e)
         {
             InitializeMyo();
+
+            InitializeMyo2();
 
             Pause = true;
             MessageBox.Show("TRY TO GET THE BALL PAST THE ENEMY'S PADDLE."+
@@ -111,6 +116,7 @@ namespace PongWithMyo
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             StopMyo();
+            
         }
 
         private void InitializeMyo()
@@ -119,23 +125,22 @@ namespace PongWithMyo
             myoHub = Hub.Create(myoChannel);
 
             myoHub.MyoConnected += myoHub_MyoConnected; 
-            myoHub.MyoDisconnected += myoHub_MyoDisconnected;
+            myoHub.MyoDisconnected -= myoHub_MyoDisconnected;
 
             myoChannel.StartListening();
         }
 
         private void InitializeMyo2()
         {
-            myoChannel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
-            myoHub = Hub.Create(myoChannel);
+            myoChannel2 = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
+            myoHub2 = Hub.Create(myoChannel2);
 
-            myoHub.MyoConnected += myoHub_MyoConnected;
-            myoHub.MyoDisconnected += myoHub_MyoDisconnected;
+            myoHub2.MyoConnected += myoHub2_MyoConnected;
+            myoHub2.MyoDisconnected -= myoHub2_MyoDisconnected;
 
-            myoChannel.StartListening();
+            myoChannel2.StartListening();
         }
 
-        #region CONNECT/DISCONNECT MYO
         void myoHub_MyoConnected(object sender, MyoEventArgs e)
         { 
             MessageBox.Show("Myo is connected");
@@ -146,6 +151,21 @@ namespace PongWithMyo
             e.Myo.OrientationDataAcquired += Myo_OrientationDataAcquired;
 
             var pose = HeldPose.Create(e.Myo, Pose.Fist, Pose.WaveIn, Pose.WaveOut);
+
+            pose.Interval = TimeSpan.FromSeconds(0.5);
+            pose.Start();
+            // pose.Triggered += pose_Triggered;
+        }
+        void myoHub2_MyoConnected(object sender, MyoEventArgs f)
+        {
+            MessageBox.Show("Myo 2 is connected");
+
+            f.Myo.Vibrate(VibrationType.Long);
+            f.Myo.Unlock(UnlockType.Hold); // keeps the MYO unlocked
+
+            f.Myo.OrientationDataAcquired += Myo2_OrientationDataAcquired;
+
+            var pose = HeldPose.Create(f.Myo, Pose.Fist, Pose.WaveIn, Pose.WaveOut);
 
             pose.Interval = TimeSpan.FromSeconds(0.5);
             pose.Start();
@@ -168,7 +188,7 @@ namespace PongWithMyo
             {
                 PlayerOneMovement = 0;
             }
-            else if (Roll <= InitRoll)
+            else if (Roll <= InitRoll) 
             {
                 if (Player1.Location.X + Player1.Width > this.Width)
                 {
@@ -195,6 +215,49 @@ namespace PongWithMyo
             }
             
         }
+        private void Myo2_OrientationDataAcquired(object sender, OrientationDataEventArgs f)
+        {
+            var pose = HeldPose.Create(f.Myo, Pose.Fist, Pose.DoubleTap);
+            const float PI = (float)System.Math.PI;
+            var Roll = (f.Roll + PI) / (PI * 2.0f) * 100;
+            string data2 = "Roll: " + Roll.ToString() + Environment.NewLine;
+            InvokeData2(data2);
+            var InitRoll = 50;
+            if (f.Myo.Pose == Pose.DoubleTap)
+            {
+                Close();
+            }
+            if (f.Myo.Pose == Pose.Fist)
+            {
+                PlayerTwoMovement = 0;
+            }
+            else if (Roll <= InitRoll)
+            {
+                if (Player2.Location.X + Player2.Width > this.Width)
+                {
+                    PlayerTwoMovement = 0;
+                }
+                else
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerTwoMovement = SpeedOfPlayer;
+                }
+                //PlayerOneMovement = SpeedOfPlayer;
+            }
+            else if (Roll >= InitRoll)
+            {
+                if (Player2.Location.X < 0)
+                {
+                    PlayerTwoMovement = 0;
+                }
+                else if (Player2.Location.X > 0)
+                {
+                    SpeedOfPlayer = 4;
+                    PlayerTwoMovement = -SpeedOfPlayer;
+                }
+            }
+
+        }
         /* SCRAPPED IDEA FOR POSES DUE TO POOR ACCURACY
         void pose_Triggered(object sene, PoseEventArgs e)
         {
@@ -218,12 +281,18 @@ namespace PongWithMyo
             }
         }
         */
-       
+
 
         void myoHub_MyoDisconnected(object sender, MyoEventArgs e)
         {
             MessageBox.Show("Myo is disconnected");
             e.Myo.OrientationDataAcquired -= Myo_OrientationDataAcquired;
+
+        }
+        void myoHub2_MyoDisconnected(object sender, MyoEventArgs e)
+        {
+            MessageBox.Show("Myo 2 is disconnected");
+            e.Myo.OrientationDataAcquired -= Myo2_OrientationDataAcquired;
 
         }
 
@@ -241,12 +310,26 @@ namespace PongWithMyo
 
         }
 
+        public void InvokeData2(string data2)
+        {
+
+            if (InvokeRequired)
+            {
+                this.Invoke(new Action<string>(InvokeData), new object[] { data2 });
+                return;
+            }
+            richTextBox2.Clear();
+            richTextBox2.AppendText(data2 + Environment.NewLine);
+
+        }
+         
         private void StopMyo()
         {
             myoChannel.StopListening();
             myoChannel.Dispose();
+            myoChannel2.StartListening();
+            myoChannel2.Dispose();
         }
-        #endregion
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
