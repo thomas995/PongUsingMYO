@@ -36,8 +36,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.Ball = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.Player2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Player1)).BeginInit();
@@ -49,7 +47,7 @@
             this.Player2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Player2.BackColor = System.Drawing.Color.HotPink;
             this.Player2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player2.Location = new System.Drawing.Point(360, 12);
+            this.Player2.Location = new System.Drawing.Point(375, 12);
             this.Player2.Name = "Player2";
             this.Player2.Size = new System.Drawing.Size(120, 21);
             this.Player2.TabIndex = 0;
@@ -60,7 +58,7 @@
             this.Player1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Player1.BackColor = System.Drawing.Color.SpringGreen;
             this.Player1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player1.Location = new System.Drawing.Point(360, 325);
+            this.Player1.Location = new System.Drawing.Point(375, 325);
             this.Player1.Name = "Player1";
             this.Player1.Size = new System.Drawing.Size(120, 21);
             this.Player1.TabIndex = 1;
@@ -114,30 +112,12 @@
             this.label2.TabIndex = 6;
             this.label2.Text = "Player 1";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 183);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox1.TabIndex = 7;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.Visible = false;
-            // 
-            // richTextBox2
-            // 
-            this.richTextBox2.Location = new System.Drawing.Point(12, 62);
-            this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(100, 96);
-            this.richTextBox2.TabIndex = 8;
-            this.richTextBox2.Text = "";
-            this.richTextBox2.Visible = false;
-            // 
             // Ball
             // 
             this.Ball.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Ball.BackColor = System.Drawing.Color.Black;
             this.Ball.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Ball.Location = new System.Drawing.Point(408, 162);
+            this.Ball.Location = new System.Drawing.Point(423, 162);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(30, 27);
             this.Ball.TabIndex = 2;
@@ -149,8 +129,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
             this.ClientSize = new System.Drawing.Size(823, 358);
-            this.Controls.Add(this.richTextBox2);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.p1Score);
@@ -182,8 +160,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.PictureBox Ball;
     }
 }

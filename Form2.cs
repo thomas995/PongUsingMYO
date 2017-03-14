@@ -151,13 +151,13 @@ namespace PongWithMyo
         // Creates a channel and hub for the MYO to connect to
         private void InitializeMyo()
         {
-            myoChannel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
-            myoHub = Hub.Create(myoChannel);
+                myoChannel = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
+                myoHub = Hub.Create(myoChannel);
 
-            myoHub.MyoConnected += myoHub_MyoConnected; // runs method when MYO connects
-            myoHub.MyoDisconnected -= myoHub_MyoDisconnected; // runs method when MYO disconnects
+                myoHub.MyoConnected += myoHub_MyoConnected; // runs method when MYO connects
+                myoHub.MyoDisconnected -= myoHub_MyoDisconnected; // runs method when MYO disconnects
 
-            myoChannel.StartListening();
+                myoChannel.StartListening();  
         }
 
         // Creates a channel and hub for the second MYO to connect to
@@ -336,9 +336,6 @@ namespace PongWithMyo
                 this.Invoke(new Action<string>(InvokeData), new object[] { data });
                 return;
             }
-            richTextBox1.Clear();
-            richTextBox1.AppendText(data + Environment.NewLine);
-
         }
 
         public void InvokeData2(string data2)
@@ -349,9 +346,7 @@ namespace PongWithMyo
                 this.Invoke(new Action<string>(InvokeData), new object[] { data2 });
                 return;
             }
-            richTextBox2.Clear();
-            richTextBox2.AppendText(data2 + Environment.NewLine);
-
+           
         }
 
         private void StopMyo()
@@ -427,6 +422,7 @@ namespace PongWithMyo
                     SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
                     MessageBox.Show("Player Two's Score Saved Successfully");
                     SW2.Close();
+                    StopMyo();
                     this.Close();
                 }
                 if (!File.Exists(Path_PlayerTwo))
@@ -438,14 +434,19 @@ namespace PongWithMyo
                     SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
                     MessageBox.Show("Player Two's Score Saved Successfully");
                     SW2.Close();
-                    this.Close();
-
-                }
+                    StopMyo();
+                    Form1 f1 = new Form1();
+                    f1.Show();
+                    this.Hide();
+                  }
                } // YES
 
                 if (dialogResult == DialogResult.No)
                 {
-                    this.Close(); // close the program
+                    StopMyo();
+                    Form1 f1 = new Form1();
+                    f1.Show();
+                    this.Hide();
                 }
                 else if(dialogResult == DialogResult.Cancel)
                 {

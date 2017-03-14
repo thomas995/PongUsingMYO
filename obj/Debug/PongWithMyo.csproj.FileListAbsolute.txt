@@ -8,4 +8,6 @@ c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\Pong
 c:\users\thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.pdb
 C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.Form2.resources
 C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.HighScores.resources
+C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.MYO_Test.resources
 C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.Form3.resources

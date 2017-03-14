@@ -30,7 +30,7 @@ namespace PongWithMyo
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
-            
+            MessageBox.Show("Ensure MYO is connected to play the game...");
             Form2 f2 = new Form2();
             f2.Show();
             this.Hide();
@@ -65,6 +65,18 @@ namespace PongWithMyo
             {
                 // do nothing
             }
+        }
+
+        private void btnMyoTest_Click(object sender, EventArgs e)
+        {
+            MYO_Test mt = new MYO_Test();
+            mt.Show();
+            this.Hide();
+        }
+
+        private void btnStartGameKB_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
