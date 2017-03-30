@@ -11,3 +11,16 @@ C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\Pong
 C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.MYO_Test.resources
 C:\Users\Thomas\Documents\Visual Studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache
 C:\Users\Thomas\documents\visual studio 2015\Projects\PongWithMyo\obj\Debug\PongWithMyo.Form3.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\bin\Debug\PongWithMyo.exe.config
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\bin\Debug\PongWithMyo.exe
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\bin\Debug\PongWithMyo.pdb
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.Form1.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.Form2.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.FormKB.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.HighScores.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.MYO_Test.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.Properties.Resources.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.csproj.GenerateResource.Cache
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.exe
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.pdb
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\obj\Debug\PongWithMyo.csprojResolveAssemblyReference.cache

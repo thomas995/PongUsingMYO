@@ -31,6 +31,7 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.txtScoresOne = new System.Windows.Forms.RichTextBox();
             this.txtScoresTwo = new System.Windows.Forms.RichTextBox();
+            this.txtHighScore = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnBack
@@ -62,11 +63,21 @@
             this.txtScoresTwo.TabIndex = 3;
             this.txtScoresTwo.Text = "";
             // 
+            // txtHighScore
+            // 
+            this.txtHighScore.BackColor = System.Drawing.Color.DarkOrange;
+            this.txtHighScore.Location = new System.Drawing.Point(12, 266);
+            this.txtHighScore.Name = "txtHighScore";
+            this.txtHighScore.Size = new System.Drawing.Size(119, 31);
+            this.txtHighScore.TabIndex = 5;
+            this.txtHighScore.Text = "";
+            // 
             // HighScores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(363, 317);
+            this.Controls.Add(this.txtHighScore);
             this.Controls.Add(this.txtScoresTwo);
             this.Controls.Add(this.txtScoresOne);
             this.Controls.Add(this.btnBack);
@@ -80,5 +91,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.RichTextBox txtScoresOne;
         private System.Windows.Forms.RichTextBox txtScoresTwo;
+        private System.Windows.Forms.RichTextBox txtHighScore;
     }
 }

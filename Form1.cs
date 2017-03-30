@@ -23,10 +23,17 @@ namespace PongWithMyo
         public Form1()
         {
             InitializeComponent();
+            bgMusic.SoundLocation = "chiptune.wav";
+            bgMusic.PlayLooping();
+
         }
 
         string Path_PlayerOne = Environment.CurrentDirectory + "/" + "PlayerOneSaves.txt"; // path assigned to saving score
         string Path_PlayerTwo = Environment.CurrentDirectory + "/" + "PlayerTwoSaves.txt"; // path assigned to saving score
+
+        // variable to allow sound effects to be used
+        System.Media.SoundPlayer bgMusic = new System.Media.SoundPlayer();
+
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
@@ -34,6 +41,8 @@ namespace PongWithMyo
             Form2 f2 = new Form2();
             f2.Show();
             this.Hide();
+            bgMusic.Stop();
+
         }
 
         private void btnHighScores_Click(object sender, EventArgs e)
@@ -51,6 +60,7 @@ namespace PongWithMyo
                 HighScores hs = new HighScores();
                 hs.Show();
                 this.Hide();
+                bgMusic.Stop();
             }
         }
 
@@ -60,6 +70,7 @@ namespace PongWithMyo
             if (dialogResult == DialogResult.Yes)
             {
                 this.Close(); // close the program
+                bgMusic.Stop();
             }
             else if (dialogResult == DialogResult.No)
             {
@@ -72,11 +83,31 @@ namespace PongWithMyo
             MYO_Test mt = new MYO_Test();
             mt.Show();
             this.Hide();
+            bgMusic.Stop();
+
         }
 
         private void btnStartGameKB_Click(object sender, EventArgs e)
         {
+            FormKB fkb = new FormKB();
+            fkb.Show();
+            this.Hide();
+            bgMusic.Stop();
 
+        }
+
+        // keys to press to pause
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.M)
+            {
+                bgMusic.Stop();
+            }
+            // starts the music again
+            if (e.KeyCode == Keys.N)
+            {
+                bgMusic.PlayLooping();
+            }
         }
     }
 }

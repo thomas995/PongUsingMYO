@@ -47,7 +47,7 @@
             this.Player2.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Player2.BackColor = System.Drawing.Color.HotPink;
             this.Player2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player2.Location = new System.Drawing.Point(375, 12);
+            this.Player2.Location = new System.Drawing.Point(439, 12);
             this.Player2.Name = "Player2";
             this.Player2.Size = new System.Drawing.Size(120, 21);
             this.Player2.TabIndex = 0;
@@ -58,7 +58,7 @@
             this.Player1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Player1.BackColor = System.Drawing.Color.SpringGreen;
             this.Player1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Player1.Location = new System.Drawing.Point(375, 325);
+            this.Player1.Location = new System.Drawing.Point(439, 399);
             this.Player1.Name = "Player1";
             this.Player1.Size = new System.Drawing.Size(120, 21);
             this.Player1.TabIndex = 1;
@@ -79,7 +79,7 @@
             this.p1Score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.p1Score.AutoSize = true;
             this.p1Score.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p1Score.Location = new System.Drawing.Point(-2, 333);
+            this.p1Score.Location = new System.Drawing.Point(-2, 407);
             this.p1Score.Name = "p1Score";
             this.p1Score.Size = new System.Drawing.Size(27, 29);
             this.p1Score.TabIndex = 4;
@@ -106,7 +106,7 @@
             this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(31, 338);
+            this.label2.Location = new System.Drawing.Point(31, 412);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 16);
             this.label2.TabIndex = 6;
@@ -117,7 +117,7 @@
             this.Ball.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.Ball.BackColor = System.Drawing.Color.Black;
             this.Ball.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.Ball.Location = new System.Drawing.Point(423, 162);
+            this.Ball.Location = new System.Drawing.Point(487, 199);
             this.Ball.Name = "Ball";
             this.Ball.Size = new System.Drawing.Size(30, 27);
             this.Ball.TabIndex = 2;
@@ -128,7 +128,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
-            this.ClientSize = new System.Drawing.Size(823, 358);
+            this.ClientSize = new System.Drawing.Size(950, 432);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.p1Score);

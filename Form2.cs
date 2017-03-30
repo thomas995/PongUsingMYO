@@ -3,17 +3,13 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using System.Windows.Forms;
 
 using MyoSharp.Device;
 using MyoSharp.Communication;
 using MyoSharp.Exceptions;
-using System.Threading;
 using MyoSharp.Poses;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.IO;
 
 namespace PongWithMyo 
@@ -45,6 +41,10 @@ namespace PongWithMyo
         string Path_PlayerOne = Environment.CurrentDirectory + "/" + "PlayerOneSaves.txt"; // path assigned to saving score
         string Path_PlayerTwo = Environment.CurrentDirectory + "/" + "PlayerTwoSaves.txt"; // path assigned to saving score
 
+        string Path_PlayerOne_SCOREONLY = Environment.CurrentDirectory + "/" + "PlayerOneSCOREONLY.txt"; // path assigned to saving score(score number only)
+        string Path_PlayerTwo_SCOREONLY = Environment.CurrentDirectory + "/" + "PlayerTwoSCOREONLY.txt"; // path assigned to saving score(score number only)
+
+        System.Media.SoundPlayer collisionSound = new System.Media.SoundPlayer();
 
         bool Pause; // True/False variable for Starting/Pausing the game
         #endregion
@@ -118,10 +118,14 @@ namespace PongWithMyo
             if (Ball.Location.X > Player1.Location.X && Ball.Location.X + Ball.Width < Player1.Location.X + Player1.Width && Ball.Location.Y + Ball.Height > Player1.Location.Y)
             {
                 BallY *= -1;
+                collisionSound.SoundLocation = "pongSE.wav";
+                collisionSound.Play();
             }
             if (Ball.Location.X > Player2.Location.X && Ball.Location.X + Ball.Width < Player2.Location.X + Player2.Width && Ball.Location.Y < Player2.Location.Y + Player2.Height)
             {
                 BallY *= -1;
+                collisionSound.SoundLocation = "pongSE.wav";
+                collisionSound.Play();
             }
             if (Ball.Location.X < 0)
             {
@@ -132,16 +136,7 @@ namespace PongWithMyo
                 BallX *= -1;
             }   
         }
-        private void P1Winner()
-        {
-            Pause = true;
-        }
-
-        private void P2Winner()
-        {
-            Pause = true;
-        }
-
+       
         #endregion
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -174,22 +169,22 @@ namespace PongWithMyo
 
         void myoHub_MyoConnected(object sender, MyoEventArgs e)
         {
-            MessageBox.Show("Myo is connected");
+            MessageBox.Show("Myo is connected"); // pop up to let user know the MYO is connected
 
-            e.Myo.Vibrate(VibrationType.Long);
+            e.Myo.Vibrate(VibrationType.Long); // vibrates the MYO
             e.Myo.Unlock(UnlockType.Hold); // keeps the MYO unlocked
 
             e.Myo.OrientationDataAcquired += Myo_OrientationDataAcquired;
 
             var pose = HeldPose.Create(e.Myo, Pose.Fist, Pose.WaveIn, Pose.WaveOut);
 
-            pose.Interval = TimeSpan.FromSeconds(0.5);
+            pose.Interval = TimeSpan.FromSeconds(0.5); // checks which pose is being done every half second
             pose.Start();
             // pose.Triggered += pose_Triggered;
         }
         void myoHub2_MyoConnected(object sender, MyoEventArgs f)
         {
-            /* MessageBox.Show("Myo 2 is connected");
+             MessageBox.Show("Myo 2 is connected"); // lets the user know that the second MYO is connected
 
              f.Myo.Vibrate(VibrationType.Long);
              f.Myo.Unlock(UnlockType.Hold); // keeps the MYO unlocked
@@ -200,7 +195,7 @@ namespace PongWithMyo
 
              pose.Interval = TimeSpan.FromSeconds(0.5);
              pose.Start();
-             // pose.Triggered += pose_Triggered; */
+             // pose.Triggered += pose_Triggered; 
         }
 
         private void Myo_OrientationDataAcquired(object sender, OrientationDataEventArgs e)
@@ -248,7 +243,7 @@ namespace PongWithMyo
         }
         private void Myo2_OrientationDataAcquired(object sender, OrientationDataEventArgs f)
         {
-            /*var pose = HeldPose.Create(f.Myo, Pose.Fist, Pose.DoubleTap);
+            var pose = HeldPose.Create(f.Myo, Pose.Fist, Pose.DoubleTap);
             const float PI = (float)System.Math.PI;
             var Roll = (f.Roll + PI) / (PI * 2.0f) * 100;
             string data2 = "Roll: " + Roll.ToString() + Environment.NewLine;
@@ -287,7 +282,7 @@ namespace PongWithMyo
                     PlayerTwoMovement = -SpeedOfPlayer;
                 }
             }
-            */
+            
         }
         /* SCRAPPED IDEA FOR POSES DUE TO POOR ACCURACY
         void pose_Triggered(object sene, PoseEventArgs e)
@@ -313,7 +308,7 @@ namespace PongWithMyo
         }
         */
 
-
+        // Lets the user know that the MYO's have been disconnected
         void myoHub_MyoDisconnected(object sender, MyoEventArgs e)
         {
             MessageBox.Show("Myo is disconnected");
@@ -322,8 +317,8 @@ namespace PongWithMyo
         }
         void myoHub2_MyoDisconnected(object sender, MyoEventArgs e)
         {
-            // MessageBox.Show("Myo 2 is disconnected");
-            // e.Myo.OrientationDataAcquired -= Myo2_OrientationDataAcquired;
+             MessageBox.Show("Myo 2 is disconnected");
+             e.Myo.OrientationDataAcquired -= Myo2_OrientationDataAcquired;
 
         }
 
@@ -349,12 +344,13 @@ namespace PongWithMyo
            
         }
 
+        // When the method is called, stops and drops the channels the MYO's are connected to
         private void StopMyo()
         {
             myoChannel.StopListening();
             myoChannel.Dispose();
-            // myoChannel2.StopListening();
-            //myoChannel2.Dispose();
+            myoChannel2.StopListening();
+            myoChannel2.Dispose();
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e) 
@@ -398,48 +394,74 @@ namespace PongWithMyo
                     {
 
                         StreamWriter SW1;
+                        StreamWriter SW1_SO;
                         SW1 = File.AppendText(Path_PlayerOne);
+                        SW1_SO = File.AppendText(Path_PlayerOne_SCOREONLY);
                         SW1.WriteLine(ScoreOne + " - Player One  " + DateTime.Now);
+                        SW1_SO.WriteLine(ScoreOne);
                         MessageBox.Show("Player One's Score Saved Successfully");
                         SW1.Close();
+                        SW1_SO.Close();
                     }
-                    if(!File.Exists(Path_PlayerOne))
+                    if (!File.Exists(Path_PlayerOne))
                     {
                         StreamWriter SW1;
+                        StreamWriter SW1_SO;
                         SW1 = File.CreateText(Path_PlayerOne);
+                        SW1_SO = File.CreateText(Path_PlayerOne_SCOREONLY);
                         SW1.Close();
+                        SW1_SO.Close();
                         SW1 = File.AppendText(Path_PlayerOne);
+                        SW1_SO = File.AppendText(Path_PlayerOne_SCOREONLY);
                         SW1.WriteLine(ScoreOne + " - Player One  " + DateTime.Now);
+                        SW1_SO.WriteLine(ScoreOne);
                         MessageBox.Show("Player One's Score Saved Successfully");
                         SW1.Close();
+                        SW1_SO.Close();
                     }
-                
-                
-                if (File.Exists(Path_PlayerTwo))
-                {
-                    StreamWriter SW2;
-                    SW2 = File.AppendText(Path_PlayerTwo);
-                    SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
-                    MessageBox.Show("Player Two's Score Saved Successfully");
-                    SW2.Close();
-                    StopMyo();
-                    this.Close();
-                }
-                if (!File.Exists(Path_PlayerTwo))
-                {
-                    StreamWriter SW2;
-                    SW2 = File.CreateText(Path_PlayerTwo);
-                    SW2.Close();
-                    SW2 = File.AppendText(Path_PlayerTwo);
-                    SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
-                    MessageBox.Show("Player Two's Score Saved Successfully");
-                    SW2.Close();
-                    StopMyo();
-                    Form1 f1 = new Form1();
-                    f1.Show();
-                    this.Hide();
-                  }
-               } // YES
+
+
+                    if (File.Exists(Path_PlayerTwo))
+                    {
+
+                        StreamWriter SW2;
+                        StreamWriter SW2_SO;
+                        SW2 = File.AppendText(Path_PlayerTwo);
+                        SW2_SO = File.AppendText(Path_PlayerTwo_SCOREONLY);
+                        SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
+                        SW2_SO.WriteLine(ScoreTwo);
+                        MessageBox.Show("Player Two's Score Saved Successfully");
+                        SW2.Close();
+                        SW2_SO.Close();
+                        
+                        StopMyo();
+                        Form1 f1 = new Form1();
+                        f1.Show();
+                        this.Hide();
+                    }
+                    if (!File.Exists(Path_PlayerTwo))
+                    {
+
+                        StreamWriter SW2;
+                        StreamWriter SW2_SO;
+                        SW2 = File.CreateText(Path_PlayerTwo);
+                        SW2_SO = File.CreateText(Path_PlayerTwo_SCOREONLY);
+                        SW2.Close();
+                        SW2_SO.Close();
+                        SW2 = File.AppendText(Path_PlayerTwo);
+                        SW2_SO = File.AppendText(Path_PlayerTwo_SCOREONLY);
+                        SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
+                        SW2_SO.WriteLine(ScoreTwo);
+                        MessageBox.Show("Player Two's Score Saved Successfully");
+                        SW2.Close();
+                        SW2_SO.Close();
+                        
+                        StopMyo();
+                        Form1 f1 = new Form1();
+                        f1.Show();
+                        this.Hide();
+                    }
+                } // YES
 
                 if (dialogResult == DialogResult.No)
                 {
