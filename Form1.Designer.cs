@@ -36,6 +36,8 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnMyoTest = new System.Windows.Forms.Button();
             this.btnStartGameKB = new System.Windows.Forms.Button();
+            this.btnMute = new System.Windows.Forms.Button();
+            this.btnPlayMusic = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -106,12 +108,39 @@
             this.btnStartGameKB.UseVisualStyleBackColor = true;
             this.btnStartGameKB.Click += new System.EventHandler(this.btnStartGameKB_Click);
             // 
+            // btnMute
+            // 
+            this.btnMute.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMute.Location = new System.Drawing.Point(12, 19);
+            this.btnMute.Name = "btnMute";
+            this.btnMute.Size = new System.Drawing.Size(157, 31);
+            this.btnMute.TabIndex = 11;
+            this.btnMute.Text = " MUTE MUSIC";
+            this.btnMute.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMute.UseVisualStyleBackColor = true;
+            this.btnMute.Click += new System.EventHandler(this.btnMute_Click);
+            // 
+            // btnPlayMusic
+            // 
+            this.btnPlayMusic.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPlayMusic.Location = new System.Drawing.Point(12, 19);
+            this.btnPlayMusic.Name = "btnPlayMusic";
+            this.btnPlayMusic.Size = new System.Drawing.Size(157, 31);
+            this.btnPlayMusic.TabIndex = 12;
+            this.btnPlayMusic.Text = "  PLAY MUSIC";
+            this.btnPlayMusic.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPlayMusic.UseVisualStyleBackColor = true;
+            this.btnPlayMusic.Visible = false;
+            this.btnPlayMusic.Click += new System.EventHandler(this.btnPlayMusic_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.NavajoWhite;
             this.ClientSize = new System.Drawing.Size(823, 358);
+            this.Controls.Add(this.btnPlayMusic);
+            this.Controls.Add(this.btnMute);
             this.Controls.Add(this.btnStartGameKB);
             this.Controls.Add(this.btnMyoTest);
             this.Controls.Add(this.btnExit);
@@ -121,7 +150,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form1";
             this.Text = "Form1";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -135,6 +163,8 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnMyoTest;
         private System.Windows.Forms.Button btnStartGameKB;
+        private System.Windows.Forms.Button btnMute;
+        private System.Windows.Forms.Button btnPlayMusic;
     }
 }
 

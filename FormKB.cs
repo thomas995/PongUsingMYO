@@ -15,13 +15,13 @@ namespace PongWithMyo
     {
         #region VARIABLES
         // GAME VARIABLES
-        int SpeedOfPlayer = 4; // how fast the player will move
+        int SpeedOfPlayer = 7; // how fast the player will move
 
         int PlayerOneMovement; // allows Player One to move
         int PlayerTwoMovement; // allows Player Two to move
 
-        int BallX = 4; // speed of the ball going left to right
-        int BallY = 4; // speed of the ball going up and down
+        int BallX = 3; // speed of the ball going left to right
+        int BallY = 3; // speed of the ball going up and down
 
         int ScoreOne; // Player One's score
         int ScoreTwo; // Player Two's Score
@@ -142,7 +142,7 @@ namespace PongWithMyo
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerOneMovement = SpeedOfPlayer;
                 }
             }
@@ -154,7 +154,7 @@ namespace PongWithMyo
                 }
                 else if (Player1.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerOneMovement = -SpeedOfPlayer;
                 }
             }
@@ -190,7 +190,7 @@ namespace PongWithMyo
                         SW1_SO.Close();
                         SW1 = File.AppendText(Path_PlayerOne);
                         SW1_SO = File.AppendText(Path_PlayerOne_SCOREONLY);
-                        SW1.WriteLine(ScoreOne + " - Player One  " + DateTime.Now);
+                        SW1.WriteLine(ScoreOne + " - Player One(KB)  " + DateTime.Now);
                         SW1_SO.WriteLine(ScoreOne);
                         MessageBox.Show("Player One's Score Saved Successfully");
                         SW1.Close();
@@ -205,7 +205,7 @@ namespace PongWithMyo
                         StreamWriter SW2_SO;
                         SW2 = File.AppendText(Path_PlayerTwo);
                         SW2_SO = File.AppendText(Path_PlayerTwo_SCOREONLY);
-                        SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
+                        SW2.WriteLine(ScoreTwo + " - Player Two(KB)  " + DateTime.Now);
                         SW2_SO.WriteLine(ScoreTwo);
                         MessageBox.Show("Player Two's Score Saved Successfully");
                         SW2.Close();
@@ -259,7 +259,7 @@ namespace PongWithMyo
                 }
                 else if (Player2.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 6;
                     PlayerTwoMovement = -SpeedOfPlayer;
                 }
             }
@@ -271,7 +271,7 @@ namespace PongWithMyo
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 6;
                     PlayerTwoMovement = SpeedOfPlayer;
                 }
 

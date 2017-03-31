@@ -39,6 +39,12 @@ namespace PongWithMyo
             {
                 txtHighScore.Text = maxP2.ToString();
             }
+
+            else if(maxP1 == maxP2)
+            {
+                txtHighScore.Text = maxP1.ToString();
+            }
+
             //var max = File.ReadAllLines(Environment.CurrentDirectory + "/" + "PlayerOneSCOREONLY.txt").Select(int.Parse).Max();
             //txtHighScore.Text = max.ToString();
         }

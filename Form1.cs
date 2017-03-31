@@ -26,6 +26,11 @@ namespace PongWithMyo
             bgMusic.SoundLocation = "chiptune.wav";
             bgMusic.PlayLooping();
 
+            // display a message box telling the players how to play the game
+            MessageBox.Show("TRY TO GET THE BALL PAST THE ENEMY'S PADDLE." +
+                "PREVENT THE ENEMY FROM GETTING THE BALL PAST YOUR PADDLE. " +
+                "PRESS SPACE TO BEGIN GAME(AND PAUSE THE GAME AT ANY POINT).");
+
         }
 
         string Path_PlayerOne = Environment.CurrentDirectory + "/" + "PlayerOneSaves.txt"; // path assigned to saving score
@@ -96,18 +101,21 @@ namespace PongWithMyo
 
         }
 
-        // keys to press to pause
-        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        // buttons to press to pause/play music
+        
+        private void btnMute_Click(object sender, EventArgs e)
         {
-            if (e.KeyCode == Keys.M)
-            {
-                bgMusic.Stop();
-            }
-            // starts the music again
-            if (e.KeyCode == Keys.N)
-            {
-                bgMusic.PlayLooping();
-            }
+            bgMusic.Stop();
+            btnMute.Visible = false;
+            btnPlayMusic.Visible = true;
+          
+        }
+
+        private void btnPlayMusic_Click(object sender, EventArgs e)
+        {
+            bgMusic.PlayLooping();
+            btnMute.Visible = true;
+            btnPlayMusic.Visible = false;
         }
     }
 }

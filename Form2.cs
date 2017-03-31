@@ -27,13 +27,13 @@ namespace PongWithMyo
         IHub myoHub;
         IHub myoHub2;
 
-        int SpeedOfPlayer = 4; // how fast the player will move
+        int SpeedOfPlayer = 7; // how fast the player will move
 
         int PlayerOneMovement; // allows Player One to move
         int PlayerTwoMovement; // allows Player Two to move
 
-        int BallX = 4; // speed of the ball going left to right
-        int BallY = 4; // speed of the ball going up and down
+        int BallX = 3; // speed of the ball going left to right
+        int BallY = 3; // speed of the ball going up and down
 
         int ScoreOne; // Player One's score
         int ScoreTwo; // Player Two's Score
@@ -59,14 +59,11 @@ namespace PongWithMyo
             InitializeMyo();
 
 
-            //  InitializeMyo2();
+            //InitializeMyo2();
 
-            // When the game starts, have it remain paused until the player is ready
-            // and also display a message box telling the plyer how to play the game
+            
             Pause = true;
-            MessageBox.Show("TRY TO GET THE BALL PAST THE ENEMY'S PADDLE." +
-                "PREVENT THE ENEMY FROM GETTING THE BALL PAST YOUR PADDLE. " +
-                "PRESS SPACE TO BEGIN GAME(AND PAUSE THE GAME AT ANY POINT).");
+            
 
         }
 
@@ -114,23 +111,29 @@ namespace PongWithMyo
                 // resets the ball back to the center
                 Ball.Location = new Point(this.Width / 2, this.Height / 2);
             }
-
+            // if ball hits Player one's paddle
             if (Ball.Location.X > Player1.Location.X && Ball.Location.X + Ball.Width < Player1.Location.X + Player1.Width && Ball.Location.Y + Ball.Height > Player1.Location.Y)
             {
+                // moves ball in opposite direction
                 BallY *= -1;
+                // plays noise on collision
                 collisionSound.SoundLocation = "pongSE.wav";
                 collisionSound.Play();
             }
+            // if ball hits Player two's paddle
+
             if (Ball.Location.X > Player2.Location.X && Ball.Location.X + Ball.Width < Player2.Location.X + Player2.Width && Ball.Location.Y < Player2.Location.Y + Player2.Height)
             {
                 BallY *= -1;
                 collisionSound.SoundLocation = "pongSE.wav";
                 collisionSound.Play();
             }
+            // if ball hits left wall
             if (Ball.Location.X < 0)
             {
                 BallX *= -1;
             }
+            // if ball hits right wall
             if (Ball.Location.X + Ball.Width > this.Width)
             {
                 BallX *= -1;
@@ -212,7 +215,7 @@ namespace PongWithMyo
             }
             if (e.Myo.Pose == Pose.Fist)
             {
-                //PlayerOneMovement = 0;
+                PlayerOneMovement = 0;
             }
             else if (Roll <= InitRoll)
             {
@@ -222,7 +225,7 @@ namespace PongWithMyo
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerOneMovement = SpeedOfPlayer;
                 }
                 //PlayerOneMovement = SpeedOfPlayer;
@@ -235,7 +238,7 @@ namespace PongWithMyo
                 }
                 else if (Player1.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerOneMovement = -SpeedOfPlayer;
                 }
             }
@@ -251,11 +254,12 @@ namespace PongWithMyo
             var InitRoll = 50;
             if (f.Myo.Pose == Pose.DoubleTap)
             {
-                Close();
+                this.Close();
             }
             if (f.Myo.Pose == Pose.Fist)
             {
                 PlayerTwoMovement = 0;
+
             }
             else if (Roll <= InitRoll)
             {
@@ -265,7 +269,7 @@ namespace PongWithMyo
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerTwoMovement = SpeedOfPlayer;
                 }
                 //PlayerOneMovement = SpeedOfPlayer;
@@ -278,7 +282,7 @@ namespace PongWithMyo
                 }
                 else if (Player2.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerTwoMovement = -SpeedOfPlayer;
                 }
             }
@@ -353,6 +357,7 @@ namespace PongWithMyo
             myoChannel2.Dispose();
         }
 
+        // only needed for testing with keyboard, will be controlled with MYO
         private void Form1_KeyDown(object sender, KeyEventArgs e) 
         {
 
@@ -361,24 +366,24 @@ namespace PongWithMyo
             {
                 if (Player1.Location.X + Player1.Width > this.Width)
                 {
-                    PlayerOneMovement = 0;
+                    //PlayerOneMovement = 0;
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
-                    PlayerOneMovement = SpeedOfPlayer;
+                    //SpeedOfPlayer = 4;
+                    //PlayerOneMovement = SpeedOfPlayer;
                 }
             }
             else if ((e.KeyCode == Keys.Left))
             {
                 if (Player1.Location.X < 0)
                 {
-                    PlayerOneMovement = 0;
+                   // PlayerOneMovement = 0;
                 }
                 else if (Player1.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
-                    PlayerOneMovement = -SpeedOfPlayer;
+                    //SpeedOfPlayer = 4;
+                   // PlayerOneMovement = -SpeedOfPlayer;
                 }
             }
 
@@ -397,7 +402,7 @@ namespace PongWithMyo
                         StreamWriter SW1_SO;
                         SW1 = File.AppendText(Path_PlayerOne);
                         SW1_SO = File.AppendText(Path_PlayerOne_SCOREONLY);
-                        SW1.WriteLine(ScoreOne + " - Player One  " + DateTime.Now);
+                        SW1.WriteLine(ScoreOne + " - Player One(MYO)  " + DateTime.Now);
                         SW1_SO.WriteLine(ScoreOne);
                         MessageBox.Show("Player One's Score Saved Successfully");
                         SW1.Close();
@@ -413,7 +418,7 @@ namespace PongWithMyo
                         SW1_SO.Close();
                         SW1 = File.AppendText(Path_PlayerOne);
                         SW1_SO = File.AppendText(Path_PlayerOne_SCOREONLY);
-                        SW1.WriteLine(ScoreOne + " - Player One  " + DateTime.Now);
+                        SW1.WriteLine(ScoreOne + " - Player One(MYO)  " + DateTime.Now);
                         SW1_SO.WriteLine(ScoreOne);
                         MessageBox.Show("Player One's Score Saved Successfully");
                         SW1.Close();
@@ -434,7 +439,7 @@ namespace PongWithMyo
                         SW2.Close();
                         SW2_SO.Close();
                         
-                        StopMyo();
+                        //StopMyo();
                         Form1 f1 = new Form1();
                         f1.Show();
                         this.Hide();
@@ -450,13 +455,13 @@ namespace PongWithMyo
                         SW2_SO.Close();
                         SW2 = File.AppendText(Path_PlayerTwo);
                         SW2_SO = File.AppendText(Path_PlayerTwo_SCOREONLY);
-                        SW2.WriteLine(ScoreTwo + " - Player Two  " + DateTime.Now);
+                        SW2.WriteLine(ScoreTwo + " - Player Two(MYO)  " + DateTime.Now);
                         SW2_SO.WriteLine(ScoreTwo);
                         MessageBox.Show("Player Two's Score Saved Successfully");
                         SW2.Close();
                         SW2_SO.Close();
                         
-                        StopMyo();
+                        //StopMyo();
                         Form1 f1 = new Form1();
                         f1.Show();
                         this.Hide();
@@ -465,7 +470,7 @@ namespace PongWithMyo
 
                 if (dialogResult == DialogResult.No)
                 {
-                    StopMyo();
+                    //StopMyo();
                     Form1 f1 = new Form1();
                     f1.Show();
                     this.Hide();
@@ -484,7 +489,7 @@ namespace PongWithMyo
                 }
                 else if (Player2.Location.X > 0)
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerTwoMovement = -SpeedOfPlayer;
                 }
             }
@@ -496,7 +501,7 @@ namespace PongWithMyo
                 }
                 else
                 {
-                    SpeedOfPlayer = 4;
+                    SpeedOfPlayer = 7;
                     PlayerTwoMovement = SpeedOfPlayer;
                 }
 
@@ -545,3 +550,4 @@ namespace PongWithMyo
         }
     }
 }
+// ADAPTED FROM https://www.codeproject.com/Articles/826194/Controlling-a-Myo-Armband-with-Csharp

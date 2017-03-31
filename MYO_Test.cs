@@ -20,6 +20,7 @@ namespace PongWithMyo
         public MYO_Test()
         {
             InitializeComponent();
+            
         }
 
         // channels the MYOs will connect on
@@ -50,8 +51,8 @@ namespace PongWithMyo
             myoChannel2 = Channel.Create(ChannelDriver.Create(ChannelBridge.Create(), MyoErrorHandlerDriver.Create(MyoErrorHandlerBridge.Create())));
             myoHub2 = Hub.Create(myoChannel2);
 
-            myoHub.MyoConnected += myoHub2_MyoConnected;
-            myoHub.MyoDisconnected -= myoHub2_MyoDisconnected;
+            myoHub2.MyoConnected += myoHub2_MyoConnected;
+            myoHub2.MyoDisconnected -= myoHub2_MyoDisconnected;
 
             myoChannel2.StartListening();
         }
@@ -126,14 +127,14 @@ namespace PongWithMyo
 
         private void InvokeData(string data)
         {
-           /* if (InvokeRequired)
+            if (InvokeRequired)
             {
                 this.Invoke(new Action<string>(InvokeData), new object[] { data });
                 return;
             }
             richTextBox1.Clear();
             richTextBox1.AppendText(data + Environment.NewLine);
-            */
+            
         }
 
         public void InvokeData2(string data2)
@@ -141,7 +142,7 @@ namespace PongWithMyo
 
             if (InvokeRequired)
             {
-                this.Invoke(new Action<string>(InvokeData), new object[] { data2 });
+                this.Invoke(new Action<string>(InvokeData2), new object[] { data2 });
                 return;
             }
             // clears the textbox each time a new entry is placed into it
