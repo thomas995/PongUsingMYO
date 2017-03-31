@@ -22,6 +22,8 @@ namespace Server
         public StreamWriter myStreamWriter; // writes...
         public string messageRecieve; // Var for the message recieved
         public String messageSend; // Var for the message send
+        int noOfConnections = 1;
+
 
         public Form1()
         {
@@ -34,6 +36,8 @@ namespace Server
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                 {
                     ServerIPtextBox.Text = address.ToString();
+                    txtConnections.Text = noOfConnections.ToString();
+
                 }
             }
         }
@@ -50,6 +54,11 @@ namespace Server
 
             backgroundWorker1.RunWorkerAsync();
             backgroundWorker2.WorkerSupportsCancellation = true;
+
+            // increases number of connections and informs server side that a user is in the chatroom
+            noOfConnections++;
+            txtConnections.Text = noOfConnections.ToString();
+            ChatScreentextbox.AppendText("A user has connected!");
         }
 
         // allows the user to connect to a hosting/server IP address in order to enter the chatri
@@ -68,6 +77,8 @@ namespace Server
                 {
                     // Lets the user know that they have connected to the local server
                     ChatScreentextbox.AppendText("Connected to server" + "\n");
+                    noOfConnections++;
+                    txtConnections.Text = noOfConnections.ToString();
                     myStreamWriter = new StreamWriter(client.GetStream());
                     myStreamReader = new StreamReader(client.GetStream());
                     myStreamWriter.AutoFlush = true; // flushes the buffer

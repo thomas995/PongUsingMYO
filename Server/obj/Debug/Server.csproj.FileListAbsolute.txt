@@ -7,3 +7,12 @@ C:\Users\Thomas\Desktop\PongUsingMYO-master\Server\obj\Debug\Server.csproj.Gener
 C:\Users\Thomas\Desktop\PongUsingMYO-master\Server\obj\Debug\Server.exe
 C:\Users\Thomas\Desktop\PongUsingMYO-master\Server\obj\Debug\Server.pdb
 C:\Users\Thomas\Desktop\PongUsingMYO-master\Server\obj\Debug\Server.Form1.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\bin\Debug\Server.exe.config
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.exe
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.pdb
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\bin\Debug\Server.exe
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\bin\Debug\Server.pdb
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.csprojResolveAssemblyReference.cache
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.Form1.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.Properties.Resources.resources
+C:\Users\Thomas\Desktop\PongUsingMYO-master\PongUsingMYO-master\Server\obj\Debug\Server.csproj.GenerateResource.Cache

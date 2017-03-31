@@ -45,6 +45,8 @@
             this.ServerIPtextBox = new System.Windows.Forms.TextBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtConnections = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label6
@@ -183,11 +185,29 @@
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(518, 343);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Users:";
+            // 
+            // txtConnections
+            // 
+            this.txtConnections.Location = new System.Drawing.Point(561, 340);
+            this.txtConnections.Name = "txtConnections";
+            this.txtConnections.Size = new System.Drawing.Size(46, 20);
+            this.txtConnections.TabIndex = 30;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(658, 365);
+            this.ClientSize = new System.Drawing.Size(616, 365);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtConnections);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -204,7 +224,7 @@
             this.Controls.Add(this.ServerPorttextbox);
             this.Controls.Add(this.ServerIPtextBox);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "Server";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,6 +249,8 @@
         private System.Windows.Forms.TextBox ServerIPtextBox;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtConnections;
     }
 }
 

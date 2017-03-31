@@ -13,7 +13,7 @@ using System.IO;
 
 namespace Client
 {
-
+    // MOST COMMENTS ARE ON THE FORM ONE FOR SERVER
     public partial class Form1 : Form
     {
         // Variables
@@ -22,9 +22,11 @@ namespace Client
         public StreamWriter STW;
         public string recieve;
         public String TextToSend;
+        int noOfConnections = 1;
         public Form1()
         {
             InitializeComponent();
+
 
             IPAddress[] localIP = Dns.GetHostAddresses(Dns.GetHostName());
 
@@ -33,6 +35,8 @@ namespace Client
                 if (address.AddressFamily == AddressFamily.InterNetwork)
                 {
                     ServerIPtextBox.Text = address.ToString();
+                    txtConnections.Text = noOfConnections.ToString();
+
                 }
             }
         }
@@ -48,13 +52,22 @@ namespace Client
 
             backgroundWorker1.RunWorkerAsync();
             backgroundWorker2.WorkerSupportsCancellation = true;
+            if(client.Connected)
+            {
+                // increases number of connections and informs server side that a user is in the chatroom
+                noOfConnections++;
+                txtConnections.Text = noOfConnections.ToString();
+                ChatScreentextbox.AppendText("A user has connected!");
+
+            }
         }
 
         private void Connectbutton_Click(object sender, EventArgs e)
         {
             client = new TcpClient();
             IPEndPoint IpEnd = new IPEndPoint(IPAddress.Parse(ClientIPtextbox.Text), int.Parse(ClientPorttextbox.Text));
-
+            noOfConnections++;
+            txtConnections.Text = noOfConnections.ToString();
             try
             {
                 client.Connect(IpEnd);
@@ -62,6 +75,7 @@ namespace Client
                 if (client.Connected)
                 {
                     ChatScreentextbox.AppendText("Connected to server" + "\n");
+                   
                     STW = new StreamWriter(client.GetStream());
                     STR = new StreamReader(client.GetStream());
                     STW.AutoFlush = true;
@@ -85,7 +99,7 @@ namespace Client
                     recieve = STR.ReadLine();
                     this.ChatScreentextbox.Invoke(new MethodInvoker(delegate ()
                     {
-                        ChatScreentextbox.AppendText("You:" + recieve + "\n");
+                        ChatScreentextbox.AppendText("Opponent:" + recieve + "\n");
                     }));
                     recieve = "";
                 }
@@ -103,7 +117,7 @@ namespace Client
                 STW.WriteLine(TextToSend);
                 this.ChatScreentextbox.Invoke(new MethodInvoker(delegate ()
                 {
-                    ChatScreentextbox.AppendText("Me:" + TextToSend + "\n");
+                    ChatScreentextbox.AppendText("Player:" + TextToSend + "\n");
                 }));
             }
             else

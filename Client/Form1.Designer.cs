@@ -45,6 +45,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.backgroundWorker2 = new System.ComponentModel.BackgroundWorker();
+            this.txtConnections = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ServerIPtextBox
@@ -53,7 +55,6 @@
             this.ServerIPtextBox.Name = "ServerIPtextBox";
             this.ServerIPtextBox.Size = new System.Drawing.Size(153, 20);
             this.ServerIPtextBox.TabIndex = 0;
-           // this.ServerIPtextBox.TextChanged += new System.EventHandler(this.ServerIPtextBox_TextChanged);
             // 
             // ServerPorttextbox
             // 
@@ -61,7 +62,6 @@
             this.ServerPorttextbox.Name = "ServerPorttextbox";
             this.ServerPorttextbox.Size = new System.Drawing.Size(153, 20);
             this.ServerPorttextbox.TabIndex = 1;
-            //this.ServerPorttextbox.TextChanged += new System.EventHandler(this.ServerPorttextbox_TextChanged);
             // 
             // ClientPorttextbox
             // 
@@ -69,7 +69,6 @@
             this.ClientPorttextbox.Name = "ClientPorttextbox";
             this.ClientPorttextbox.Size = new System.Drawing.Size(153, 20);
             this.ClientPorttextbox.TabIndex = 2;
-           // this.ClientPorttextbox.TextChanged += new System.EventHandler(this.ClientPorttextbox_TextChanged);
             // 
             // ClientIPtextbox
             // 
@@ -77,7 +76,6 @@
             this.ClientIPtextbox.Name = "ClientIPtextbox";
             this.ClientIPtextbox.Size = new System.Drawing.Size(153, 20);
             this.ClientIPtextbox.TabIndex = 3;
-           // this.ClientIPtextbox.TextChanged += new System.EventHandler(this.ClientIPtextbox_TextChanged);
             // 
             // Startbutton
             // 
@@ -106,7 +104,6 @@
             this.ChatScreentextbox.Size = new System.Drawing.Size(432, 96);
             this.ChatScreentextbox.TabIndex = 6;
             this.ChatScreentextbox.Text = "";
-           // this.ChatScreentextbox.TextChanged += new System.EventHandler(this.ChatScreentextbox_TextChanged);
             // 
             // Messagetextbox
             // 
@@ -115,7 +112,6 @@
             this.Messagetextbox.Size = new System.Drawing.Size(351, 38);
             this.Messagetextbox.TabIndex = 7;
             this.Messagetextbox.Text = "";
-          //  this.Messagetextbox.TextChanged += new System.EventHandler(this.Messagetextbox_TextChanged);
             // 
             // Sendbutton
             // 
@@ -135,7 +131,6 @@
             this.label1.Size = new System.Drawing.Size(51, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "SERVER";
-            //this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // label2
             // 
@@ -145,7 +140,6 @@
             this.label2.Size = new System.Drawing.Size(45, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "CLIENT";
-           // this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -155,7 +149,6 @@
             this.label3.Size = new System.Drawing.Size(17, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "IP";
-           // this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -165,7 +158,6 @@
             this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 12;
             this.label4.Text = "PORT";
-            //this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
@@ -175,7 +167,6 @@
             this.label5.Size = new System.Drawing.Size(17, 13);
             this.label5.TabIndex = 13;
             this.label5.Text = "IP";
-           // this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
@@ -185,7 +176,6 @@
             this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 14;
             this.label6.Text = "PORT";
-           // this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // backgroundWorker1
             // 
@@ -195,11 +185,29 @@
             // 
             this.backgroundWorker2.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker2_DoWork);
             // 
+            // txtConnections
+            // 
+            this.txtConnections.Location = new System.Drawing.Point(593, 341);
+            this.txtConnections.Name = "txtConnections";
+            this.txtConnections.Size = new System.Drawing.Size(46, 20);
+            this.txtConnections.TabIndex = 15;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(550, 344);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(37, 13);
+            this.label7.TabIndex = 16;
+            this.label7.Text = "Users:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(651, 366);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtConnections);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -241,6 +249,8 @@
         private System.Windows.Forms.Label label6;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.ComponentModel.BackgroundWorker backgroundWorker2;
+        private System.Windows.Forms.TextBox txtConnections;
+        private System.Windows.Forms.Label label7;
     }
 }
 
